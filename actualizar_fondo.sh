@@ -1,11 +1,13 @@
 #!/bin/bash
-
-# 1. Mensaje informativo en la consola de GitHub
 echo "🔄 Iniciando la actualización automática del fondo..."
 
-# 2. Copia la foto nueva de tu carpeta y reemplaza la vieja con el nombre fijo
-# (Cambia "carpeta_imagenes/nueva_foto.png" por tu ruta real)
-cp "carpeta_imagenes/nueva_foto.png" "fondo.png"
+# Busca CUALQUIER archivo dentro de carpeta_imagenes y lo transforma en fondo.png
+# No importa si se llama foto.jpg, nueva_foto.PNG o cualquier otra extensión
+cp carpeta_imagenes/*.* fondo.png 2>/dev/null
 
-# 3. Confirma que el proceso terminó con éxito
-echo "✅ El archivo fondo.png ha sido reemplazado correctamente."
+if [ -f fondo.png ]; then
+    echo "✅ El archivo fondo.png ha sido reemplazado correctamente."
+else
+    echo "❌ Error: No se encontró ninguna imagen dentro de la carpeta_imagenes."
+    exit 1
+fi
